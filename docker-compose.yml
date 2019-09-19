@@ -3,6 +3,8 @@ version: '3.6'
 services:
   db:
     image: mvertes/alpine-mongo
+    restart:
+      always
     ports:
       - "${MONGO_PORT}:27017"
     environment:
@@ -15,4 +17,10 @@ services:
       - ./mongodb-data:/var/lib/mongo/data
     expose:
       - ${MONGO_PORT}
+  client:
+    image: mongoclient/mongoclient:2.2.0
+    restart:
+      always
+    ports:
+      - ${MONGO_CLIENT_PORT}:3000
       
